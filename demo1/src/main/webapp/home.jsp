@@ -9,7 +9,25 @@
 </head>
 <body>
 <h1>HOME PAGE</h1>
-<a href="login.jsp">Djesi Kraljuuuuuu</a>
+<a href="login.jsp">A nekad je dolazila stalno <br>
+
+    Brate moj<br>
+
+    Cemu ovo sve<br>
+
+    Cujem ja cujem<br>
+
+    Dace Bog<br>
+
+    Daj mi znak<br>
+
+    Fine i postene<br>
+
+    Gledam u nebo   <br>
+
+    Gluvo doba <br>
+
+    Godinu dana, 300 kafana  </a>
 
 
 <section class="vh-100">
