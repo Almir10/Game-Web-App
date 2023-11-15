@@ -16,23 +16,24 @@
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <form action="Registration" method="POST">
-                    <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <input type="email" id="form1Example13" class="form-control form-control-lg" name="email" />
-                        <label class="form-label" for="form1Example13">Email</label>
-                    </div>
+
                     <!-- Username input -->
                     <div class="form-outline mb-4">
                         <input type="text" id="form1Example33" class="form-control form-control-lg" name="username" />
                         <label class="form-label" for="form1Example13">Username</label>
                     </div>
-
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form1Example13" class="form-control form-control-lg" name="email" />
+                        <label class="form-label" for="form1Example13">Email</label>
+                    </div>
                     <!-- Password input -->
                     <div class="form-outline mb-4">
                         <input type="password" id="form1Example23" class="form-control form-control-lg" name="password" />
                         <label class="form-label" for="form1Example23">Password</label>
                     </div>
 
+                    <!-- Confirm Password input -->
                     <div class="form-outline mb-4">
                         <input type="password" id="form1Example24" class="form-control form-control-lg" name="confirmPassword" />
                         <label class="form-label" for="form1Example24">Confirm Password</label>
