@@ -43,15 +43,15 @@
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Registruj se</button>
 
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                     </div>
 
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="registration.jsp"
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="login.jsp"
                        role="button">
-                        <i class="fab fa-facebook-f me-2"></i>Make an account
+                        <i class="fab fa-facebook-f me-2"></i>Prijavi se
                     </a>
 
 
