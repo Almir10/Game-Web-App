@@ -18,7 +18,7 @@
                 <form action="Login" method="POST">
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="email" id="form1Example13" class="form-control form-control-lg" name="username" />
+                        <input type="text" id="form1Example13" class="form-control form-control-lg" name="username" />
                         <label class="form-label" for="form1Example13">Email address</label>
                     </div>
 

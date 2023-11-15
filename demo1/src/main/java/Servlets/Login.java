@@ -7,7 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.sql.*;
+import Beans.Users;
 
 @WebServlet(name = "Login",urlPatterns = {"/Login"})
 
@@ -15,10 +16,31 @@ public class Login extends HttpServlet{
         public void doPost(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
                 res.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = res.getWriter()) {
-                        String username = req.getParameter("username");
-                        System.out.println(username);
-                        String password = req.getParameter("password");
+                        String usernamex = req.getParameter("username");
+                        String passwordx = req.getParameter("password");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/baza", "root", "orhan123");
+                        //Statement statement = connection.createStatement();
+                        String sql = "SELECT * FROM tabela WHERE username=" + usernamex + "AND password= "+ passwordx;
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        statement.setString(1, usernamex);
+                        statement.setString(2, passwordx);
+
+                        ResultSet result = statement.executeQuery();
+
+                        if (result.next()) {
+                                // Korisnički podaci su tačni, korisnik je uspešno prijavljen
+                                out.println("Uspešna prijava!");
+                        } else {
+                                // Pogrešni korisnički podaci
+                                out.println("Pogrešno korisničko ime ili lozinka!");
+                        }
+
                 }
+                catch(SQLException e){
+                        System.err.println("Error connecting to the database:");
+                        e.printStackTrace();
+                }
+
         }
 }
 
