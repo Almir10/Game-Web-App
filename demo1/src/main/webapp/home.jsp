@@ -14,7 +14,46 @@
 </head>
 <body>
 <h1>KUCICA</h1>
-<a href="kuca">Djesi Kraljuuuuuu</a>
+<a href="kuca">A nekad je dolazila stalno   (65 882)
+
+    Brate moj   (39 583)
+
+    Cemu ovo sve   (39 403)
+
+    Cujem ja cujem   (5 300)
+
+    Dace Bog   (12 179)
+
+    Daj mi znak   (28 289)
+
+    Fine i postene   (982)
+
+    Gledam u nebo   (2 607)
+
+    Gluvo doba (Lane)   (37 581)
+
+    Godinu dana, 300 kafana   (82 274)
+
+
+    Idi drugome   (86 671)
+
+    Izaberi nekog da na mene lici   (62 403)
+
+    Ja se opijam   (557)
+
+    Ja te volim   (7 447)
+
+    Jos uvek sam sa tobom (feat. Adreana Cekic)   (6 305)
+
+    Kaznio si me zivote   (1 938)
+
+    Klosar (feat. Anid Cusic)   (18 647)
+
+    Ko je taj   (528)
+
+    Kome svoje srce dala si   (1 935)
+
+    Korak do sna</a>
 
 <p>Size of usersList: <%= usersList.size() %></p>
 <p>dasdasdasdadas</p>
