@@ -7,7 +7,7 @@
 
 <body>
 
-<form>
+<form action="Login" method="POST">
     <!-- Email input -->
     <div class="form-outline mb-4">
         <input type="email" id="form2Example1" class="form-control" />

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet(name = "servlet",urlPatterns = {"/Home"})
+@WebServlet(name = "Login",urlPatterns = {"/Login"})
 
 public class Login extends HttpServlet{
         public void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
