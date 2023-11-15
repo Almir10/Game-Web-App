@@ -33,6 +33,11 @@
                         <label class="form-label" for="form1Example23">Password</label>
                     </div>
 
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form1Example24" class="form-control form-control-lg" name="confirmPassword" />
+                        <label class="form-label" for="form1Example24">Confirm Password</label>
+                    </div>
+
                     <div class="d-flex justify-content-around align-items-center mb-4">
                         <!-- Checkbox -->
                         <div class="form-check">

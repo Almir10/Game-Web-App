@@ -21,6 +21,12 @@ public class Registration extends HttpServlet{
             String email = request.getParameter("email");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            String confirmPassword = request.getParameter("confirmPassword");
+
+            if (!password.equals(confirmPassword)) {
+                out.println("Lozinke se ne podudaraju. Molimo vas unesite istu lozinku u oba polja.");
+                return; // Prekid registracije ako lozinke nisu iste
+            }
 
             // Povezivanje na bazu podataka
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ucenje", "root", "almir12345")) {
@@ -28,6 +34,7 @@ public class Registration extends HttpServlet{
                 String checkUserQuery = "SELECT * FROM tabela WHERE username=?";
                 try (PreparedStatement checkUserStatement = connection.prepareStatement(checkUserQuery)) {
                     checkUserStatement.setString(1, username);
+
 
                     try (var result = checkUserStatement.executeQuery()) {
                         if (result.next()) {
