@@ -16,6 +16,7 @@ public class Login extends HttpServlet{
                 res.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = res.getWriter()) {
                         String username = req.getParameter("username");
+                        System.out.println(username);
                         String password = req.getParameter("password");
                 }
         }
