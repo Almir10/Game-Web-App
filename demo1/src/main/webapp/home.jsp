@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1>KUCICA</h1>
-<a href="kuca">Hello Servlet</a>
+<a href="kuca">Djesi Kraljuuuuuu</a>
 
 <p>Size of usersList: <%= usersList.size() %></p>
 <p>dasdasdasdadas</p>
