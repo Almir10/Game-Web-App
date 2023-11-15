@@ -8,8 +8,8 @@
     <title>HOME</title>
 </head>
 <body>
-<h1>KUCICA</h1>
-<a href="kuca">Djesi Kraljuuuuuu</a>
+<h1>HOME PAGE</h1>
+<a href="login.jsp">Djesi Kraljuuuuuu</a>
 
 
 <section class="vh-100">

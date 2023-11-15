@@ -15,7 +15,7 @@
                      class="img-fluid" alt="Phone image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form action="Login" method="Post">
+                <form action="Login" method="POST">
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <input type="email" id="form1Example13" class="form-control form-control-lg" />
