@@ -1,5 +1,5 @@
 package Servlets;
 
 public class TEST {
-    String test;
+    String test = "Sane je najbolji mladi igrac svijeta";
 }
