@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "Login",urlPatterns = {"/Login"})
 
 public class Login extends HttpServlet{
-        public void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
+        public void doPost(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
                 res.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = res.getWriter()) {
                         String username = req.getParameter("username");
