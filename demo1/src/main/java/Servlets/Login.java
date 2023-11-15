@@ -20,7 +20,8 @@ public class Login extends HttpServlet{
                         String passwordx = req.getParameter("password");
                         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/baza", "root", "orhan123");
                         //Statement statement = connection.createStatement();
-                        String sql = "SELECT * FROM tabela WHERE username=" + usernamex + "AND password= "+ passwordx;
+                        System.out.println("Povezano");
+                        String sql = "SELECT * FROM tabela WHERE username=? AND password=?";
                         PreparedStatement statement = connection.prepareStatement(sql);
                         statement.setString(1, usernamex);
                         statement.setString(2, passwordx);
