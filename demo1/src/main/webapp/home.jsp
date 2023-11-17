@@ -78,6 +78,11 @@
     </div>
 </div>
 
+<div class="text-center">
+    <a class="btn btn-primary btn-lg" href="Games" role="button">View Games</a>
+</div>
+
+
 <!-- Featured Products -->
 <div class="container mt-5">
     <h2 class="text-center mb-4">Featured Products</h2>
