@@ -12,7 +12,7 @@ public class IgreDAO {
     public List<Games> getAllGames() {
         List<Games> games = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ucenje", "root", "almir12345")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/baza", "root", "orhan123")) {
             System.out.println("Uspesno povezan s bazom podataka");
             String query = "SELECT id, title, price, logo FROM games";
             try (PreparedStatement statement = connection.prepareStatement(query)) {

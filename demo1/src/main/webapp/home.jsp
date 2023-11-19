@@ -1,3 +1,5 @@
+<%@ page import="Beans.Games" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -44,6 +46,7 @@
 </head>
 <body>
 
+
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="#">Gaming Shop</a>
@@ -78,57 +81,25 @@
     </div>
 </div>
 
-<div class="text-center">
-    <a class="btn btn-primary btn-lg" href="Games" role="button">View Games</a>
-</div>
-
-
 <!-- Featured Products -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Featured Products</h2>
+    <h2 class="text-center mb-4">SVE IGRE</h2>
     <div class="row">
-        <!-- Product 1 -->
+        <%
+            List<Games> games = (List<Games>) request.getAttribute("games");
+            for (Games game : games) {
+        %>
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="https://via.placeholder.com/300" alt="Product 1">
+                <img class="card-img-top rounded" src="<%= game.getLogo() %>" alt="<%= game.getTitle() %>">
                 <div class="card-body">
-                    <h5 class="card-title">Gaming Headset</h5>
-                    <p class="card-text">Immersive sound for the ultimate gaming experience.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">$99.99</span>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                    </div>
+                    <h5 class="card-title"><%= game.getTitle() %></h5>
+                    <p class="card-text">Price: $<%= game.getPrice() %> USD</p>
+                    <!-- Add your additional content or buttons here if needed -->
                 </div>
             </div>
         </div>
-        <!-- Product 2 -->
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="https://via.placeholder.com/300" alt="Product 2">
-                <div class="card-body">
-                    <h5 class="card-title">Gaming Mouse</h5>
-                    <p class="card-text">Precision and speed for your gaming needs.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">$49.99</span>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Product 3 -->
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="https://via.placeholder.com/300" alt="Product 3">
-                <div class="card-body">
-                    <h5 class="card-title">Gaming Keyboard</h5>
-                    <p class="card-text">Mechanical keys for a responsive gaming experience.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">$79.99</span>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <% } %>
     </div>
 </div>
 
