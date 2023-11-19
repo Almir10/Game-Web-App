@@ -57,13 +57,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="Games">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link" href="Games">Games</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" href="cart.jsp">Cart</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
@@ -87,21 +87,38 @@
     <div class="row">
         <%
             List<Games> games = (List<Games>) request.getAttribute("games");
-            for (Games game : games) {
+
+            if (games != null) {
+                for (Games game : games) {
         %>
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-                <img class="card-img-top rounded" src="<%= game.getLogo() %>" alt="<%= game.getTitle() %>">
-                <div class="card-body">
-                    <h5 class="card-title"><%= game.getTitle() %></h5>
-                    <p class="card-text">Price: $<%= game.getPrice() %> USD</p>
-                    <!-- Add your additional content or buttons here if needed -->
+        <form action="AddToCart" method="post" accept-charset="UTF-8">
+            <input type="hidden" name="id" value="<%= game.getId() %>">
+            <input type="hidden" name="title" value="<%= game.getTitle() %>">
+            <!-- Add other hidden fields as needed -->
+
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top rounded" src="<%= game.getLogo() %>" alt="<%= game.getTitle() %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= game.getTitle() %></h5>
+                        <p class="card-text">Price: $<%= game.getPrice() %> USD</p>
+                        <div class="text-center my-4">
+                            <button type="submit" class="btn btn-info">Add to cart</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <% } %>
+        </form>
+        <%
+                } // end for loop
+            } else {
+                // Handle the case when games is null (optional)
+                out.println("No games available.");
+            }
+        %>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="text-white text-center py-3">

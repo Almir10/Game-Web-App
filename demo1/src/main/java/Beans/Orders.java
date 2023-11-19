@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Orders {
     int id;
@@ -12,7 +9,7 @@ public class Orders {
     double total;
     String products;
     short status;
-
+    private List<Games> games;
 
     public int getId() {
         return id;
@@ -54,4 +51,38 @@ public class Orders {
         this.status = status;
     }
 
-}
+    public List<Games> getGames() {
+        if (games == null) {
+            games = new ArrayList<>();
+        }
+        return games;
+    }
+
+    public void setGames(List<Games> games) {
+        this.games = games;
+    }
+
+    public Orders() {
+        this.games = new ArrayList<>();
+    }
+
+    public List<Games> getCartItems() {
+        return games;
+    }
+
+    public void addItemToCart(Games game) {
+        games.add(game);
+    }
+
+    // New method to update quantity for a specific game
+    public void updateQuantity(int gameId, int quantity) {
+        for (Games game : games) {
+            if (game.getId() == gameId) {
+                game.setQuantity(quantity);
+                return;
+            }
+        }
+            }
+        }
+
+

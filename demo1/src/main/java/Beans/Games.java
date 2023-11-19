@@ -5,7 +5,7 @@ public class Games {
     private int id;
     private String title;
     private float price;
-
+    private int quantity;
     private String logo;
     private float rating;
     private String category;
@@ -65,5 +65,13 @@ public class Games {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
