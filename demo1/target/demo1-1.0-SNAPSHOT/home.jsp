@@ -55,20 +55,38 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <div class="navbar-nav ml-auto">
+            <!-- ... other list items ... -->
             <li class="nav-item active">
                 <a class="nav-link" href="Games">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Games">Games</a>
             </li>
+            <% String username = (String) session.getAttribute("username"); %>
+            <% if (username != null) { %>
+            <!-- User is logged in -->
+            <span class="navbar-text">
+                Welcome, <%= username %> <!-- Display the username -->
+            </span>
+            <li class="nav-item">
+                <form class="form-inline" action="Logout" method="post">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+                </form>
+            </li>
+            <% } else { %>
+            <!-- User is not logged in -->
+            <li class="nav-item">
+                <a class="nav-link" href="login.jsp">Login</a>
+            </li>
+            <% } %>
+            <% if (username != null) { %>
+            <!-- Display the "Cart" link only if the user is logged in -->
             <li class="nav-item">
                 <a class="nav-link" href="cart.jsp">Cart</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-        </ul>
+            <% } %>
+        </div>
     </div>
 </nav>
 
@@ -81,6 +99,22 @@
     </div>
 </div>
 
+<!-- Search and Sort Section -->
+<div class="container mt-3">
+    <form class="form-inline">
+        <!-- Search Bar -->
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+
+        <!-- Sort Dropdown -->
+        <select class="form-control mr-sm-2" name="sort">
+            <option value="price">Sort by Price</option>
+            <option value="name">Sort by Name</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search & Sort</button>
+    </form>
+</div>
 <!-- Featured Products -->
 <div class="container mt-5">
     <h2 class="text-center mb-4">SVE IGRE</h2>
