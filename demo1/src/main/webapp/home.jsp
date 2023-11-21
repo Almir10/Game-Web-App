@@ -125,19 +125,28 @@
 
 <!-- Search and Sort Section -->
 <div class="container mt-3">
-    <form class="form-inline" action="GameFilterServlet" method="post">
-        <!-- Search Bar -->
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    <!-- Search and Sort Section -->
+    <div class="container mt-3">
+        <form class="form-inline" action="GameFilterServlet" method="get">
+            <!-- Search Bar -->
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
 
-        <!-- Sort Dropdown -->
-        <select class="form-control mr-sm-2" name="sort">
-            <option value="price">Sort by Price</option>
-            <option value="name">Sort by Name</option>
-        </select>
+            <!-- Sort Dropdown -->
+            <select class="form-control mr-sm-2" name="sort">
+                <option value="price">Sort by Price</option>
+                <option value="name">Sort by Name</option>
+            </select>
 
-        <!-- Submit Button -->
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search & Sort</button>
-    </form>
+            <!-- Order Dropdown -->
+            <select class="form-control mr-sm-2" name="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search & Sort</button>
+        </form>
+    </div>
 </div>
 <!-- Featured Products -->
 <div class="container mt-5">
