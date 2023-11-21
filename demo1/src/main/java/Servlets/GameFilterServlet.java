@@ -22,20 +22,21 @@ import Beans.Users;
 @WebServlet(name = "GameFilterServlet", urlPatterns = {"/GameFilterServlet"})
 
 public class GameFilterServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Dohvati vrednosti iz forme
         String search = request.getParameter("search");
         String sort = request.getParameter("sort");
+        String order = request.getParameter("order");
 
-        // Pozovi metodu za filtriranje i sortiranje iz DAO klase
-        IgreDAO dao = new IgreDAO();
-        List<Games> filteredGames = dao.getFilteredGames(search, sort);
+        // Dohvati filtrirane igre
+        List<Games> filteredGames = IgreDAO.getFilteredGames(search, sort, order);
 
-        // Postavi filtrirane igre kao atribut za prikaz na stranici
+        // Postavi filtrirane igre kao atribut zahteva
         request.setAttribute("games", filteredGames);
 
-        // Prosledi kontrolu na home.jsp
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        // Prosledi zahtev na odgovarajući JSP
+        RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+        dispatcher.forward(request, response);
     }
 }

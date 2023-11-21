@@ -38,7 +38,7 @@ public class IgreDAO {
         return games;
     }
 
-    public static List<Games> getFilteredGames(String search, String sort) {
+    public static List<Games> getFilteredGames(String search, String sort, String order) {
         List<Games> filteredGames = new ArrayList<>();
         List<Games> allGames = getAllGames();
 
@@ -49,13 +49,24 @@ public class IgreDAO {
             }
         }
 
-        // Logika za sortiranje
         if ("price".equals(sort)) {
             // Sortirajte po ceni
-            filteredGames.sort((g1, g2) -> Double.compare(g1.getPrice(), g2.getPrice()));
+            filteredGames.sort((g1, g2) -> {
+                if ("asc".equals(order)) {
+                    return Double.compare(g1.getPrice(), g2.getPrice());
+                } else {
+                    return Double.compare(g2.getPrice(), g1.getPrice());
+                }
+            });
         } else if ("name".equals(sort)) {
             // Sortirajte po imenu
-            filteredGames.sort((g1, g2) -> g1.getTitle().compareToIgnoreCase(g2.getTitle()));
+            filteredGames.sort((g1, g2) -> {
+                if ("asc".equals(order)) {
+                    return g1.getTitle().compareToIgnoreCase(g2.getTitle());
+                } else {
+                    return g2.getTitle().compareToIgnoreCase(g1.getTitle());
+                }
+            });
         }
 
         return filteredGames;
