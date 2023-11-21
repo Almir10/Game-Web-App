@@ -30,7 +30,7 @@ public class AddGameServlet extends HttpServlet {
                 // Add other form parameters as needed
 
                 // Perform the database operation to add the game
-                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "adis1")) {
+                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "orhan123")) {
                     String sql = "INSERT INTO games (title, price, logo) VALUES (?, ?, ?)";
                     // Adjust the SQL statement based on your database schema and attributes
 

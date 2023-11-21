@@ -8,16 +8,15 @@ import Beans.Orders;
 
 public class CartDAO {
 
-    public static List<Orders> getCartItems(String userId) {
+    public static List<Orders> getCartItems(Integer userId) {
         List<Orders> cartItems = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
-            System.out.println("Successfully connected to the database");
-            String query = "select o.id, o.userId, g.title from orders o\n" +
-                            "join games g on o.gameId = g.id\n" +
-                            "where o.userId=?";
+            String query = "select o.id as id , o.userId as userId, g.title as title, g.price as price from orders as o " +
+                    "                            join games as g on o.gameId = g.id " +
+                    "                            where o.userId=?;";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, userId);
+                statement.setInt(1, userId);
 
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
@@ -25,6 +24,7 @@ public class CartDAO {
                         cartItem.setId(resultSet.getInt("id"));
                         cartItem.setUserId(resultSet.getString("userId"));
                         cartItem.setGameTitle(resultSet.getString("title"));
+                        cartItem.setGamePrice(resultSet.getFloat("price"));
                         cartItems.add(cartItem);
                     }
                 }
