@@ -21,7 +21,7 @@ public class Login extends HttpServlet{
                 try (PrintWriter out = res.getWriter()) {
                         String usernamex = req.getParameter("username");
                         String passwordx = req.getParameter("password");
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345");
                         //Statement statement = connection.createStatement();
                         System.out.println("Povezano");
                         String sql = "SELECT * FROM users WHERE username=? AND password=?";
