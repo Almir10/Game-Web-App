@@ -13,17 +13,14 @@ import java.util.Enumeration;
 import Beans.Users;
 
 
-@WebServlet(name = "Login",urlPatterns = {"/Login"})
-
-public class Login extends HttpServlet{
-        public void doPost(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
+@WebServlet(name = "Login", urlPatterns = { "/Login" })
+public class Login extends HttpServlet {
+        public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
                 res.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = res.getWriter()) {
                         String usernamex = req.getParameter("username");
                         String passwordx = req.getParameter("password");
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345");
-                        //Statement statement = connection.createStatement();
-                        System.out.println("Povezano");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "adis1");
                         String sql = "SELECT * FROM users WHERE username=? AND password=?";
                         PreparedStatement statement = connection.prepareStatement(sql);
                         statement.setString(1, usernamex);
@@ -32,28 +29,35 @@ public class Login extends HttpServlet{
                         ResultSet result = statement.executeQuery();
 
                         if (result.next()) {
-                                // Korisnički podaci su tačni, korisnik je uspešno prijavljen
+                                // Check the user role
+                                String role = result.getString("role");
+
                                 HttpSession session = req.getSession();
-                                session.setAttribute("id", result.getInt("id"));
-                                session.setAttribute("username", result.getString("username"));
 
-                                // Redirect to a welcome page or display a message
-                                res.sendRedirect("Games");
-                                System.out.println("Uspešna prijava!");
-
+                                if ("admin".equals(role)) {
+                                        // Admin is successfully logged in
+                                        session.setAttribute("adminUsername", result.getString("username"));
+                                        // Redirect to admin page
+                                        res.sendRedirect("adminAddGame.jsp"); // Assuming you have an admin section mapped to "/admin"
+                                } else {
+                                        // Regular user is successfully logged in
+                                        session.setAttribute("id", result.getInt("id"));
+                                        session.setAttribute("username", result.getString("username"));
+                                        // Redirect to a welcome page or display a message
+                                        res.sendRedirect("Games");
+                                }
                         } else {
-                                // Pogrešni korisnički podaci
-                                out.println("Pogrešno korisničko ime ili lozinka!");
+                                // Incorrect username or password
+                                out.println("Incorrect username or password!");
                         }
-
-                }
-                catch(SQLException e){
+                } catch (SQLException e) {
                         System.err.println("Error connecting to the database:");
                         e.printStackTrace();
                 }
-
         }
 }
+
+
 
 
 
