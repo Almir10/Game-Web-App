@@ -29,7 +29,7 @@ public class Registration extends HttpServlet{
             }
 
             // Povezivanje na bazu podataka
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
                 // Provera da li korisnik već postoji u bazi podataka
                 String checkUserQuery = "SELECT * FROM users WHERE username=?";
                 try (PreparedStatement checkUserStatement = connection.prepareStatement(checkUserQuery)) {
@@ -42,7 +42,7 @@ public class Registration extends HttpServlet{
                             out.println("Korisničko ime već postoji. Molimo vas da izaberete drugo korisničko ime.");
                         } else {
                             // Ako korisnik ne postoji, dodajte ga u bazu podataka
-                            String insertUserQuery = "INSERT INTO users (mail, username, password, role) VALUES (?, ?, ?, 'user')";
+                            String insertUserQuery = "INSERT INTO tabela (email, username, password, role) VALUES (?, ?, ?, 'user')";
                             try (PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery)) {
                                 insertUserStatement.setString(1, email);
                                 insertUserStatement.setString(2, username);
