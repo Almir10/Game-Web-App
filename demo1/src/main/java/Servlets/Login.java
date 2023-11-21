@@ -20,7 +20,7 @@ public class Login extends HttpServlet {
                 try (PrintWriter out = res.getWriter()) {
                         String usernamex = req.getParameter("username");
                         String passwordx = req.getParameter("password");
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "adis1");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "orhan123");
                         String sql = "SELECT * FROM users WHERE username=? AND password=?";
                         PreparedStatement statement = connection.prepareStatement(sql);
                         statement.setString(1, usernamex);
@@ -60,8 +60,6 @@ public class Login extends HttpServlet {
                 }
         }
 }
-
-
 
 
 

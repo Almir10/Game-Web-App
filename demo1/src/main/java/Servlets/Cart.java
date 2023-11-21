@@ -8,14 +8,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Beans.Orders;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name="Cart", urlPatterns={"/Cart"})
 public class Cart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userId = request.getParameter("userId"); // Assuming userId is passed as a parameter
-
+        HttpSession session = request.getSession();
+        System.out.println("Pozvan");
+        Integer userId = (Integer) session.getAttribute("id"); // Assuming userId is passed as a parameter
         // Retrieve cart items from the database
         List<Orders> cartItems = CartDAO.getCartItems(userId);
 
