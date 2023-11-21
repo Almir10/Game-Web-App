@@ -81,9 +81,6 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav ml-auto">
             <!-- ... other list items ... -->
-            <li class="nav-item active">
-                <a class="nav-link" href="Games">Home</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="Games">Games</a>
             </li>
@@ -91,23 +88,27 @@
             <% if (username != null) { %>
             <!-- User is logged in -->
             <span class="navbar-text">
-                Welcome, <%= username %> <!-- Display the username -->
-            </span>
+                    Welcome, <%= username %> <!-- Display the username -->
+                </span>
             <li class="nav-item">
                 <form class="form-inline" action="Logout" method="post">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
                 </form>
             </li>
+            <% if (session.getAttribute("adminUsername") != null) { %>
+            <!-- Display the "Add Game" link only if the user is an admin -->
+            <li class="nav-item">
+                <a class="nav-link" href="adminAddGame.jsp">Add Game</a>
+            </li>
+            <% } %>
+            <!-- Display the "Cart" link only if the user is logged in -->
+            <li class="nav-item">
+                <a class="nav-link" href="cart.jsp">Cart</a>
+            </li>
             <% } else { %>
             <!-- User is not logged in -->
             <li class="nav-item">
                 <a class="nav-link" href="login.jsp">Login</a>
-            </li>
-            <% } %>
-            <% if (username != null) { %>
-            <!-- Display the "Cart" link only if the user is logged in -->
-            <li class="nav-item">
-                <a class="nav-link" href="Cart">Cart</a>
             </li>
             <% } %>
         </div>
@@ -149,7 +150,7 @@
     </div>
 </div>
 <!-- Featured Products -->
-<div class="container mt-5">
+<div class="container mt-5" id="games-container">
     <h2 class="text-center mb-4">SVE IGRE</h2>
     <div class="row">
         <%
@@ -160,7 +161,8 @@
         %>
         <div class="col-md-4">
             <form action="AddToCart" method="post" accept-charset="UTF-8">
-                <input type="hidden" name="gameId" value="<%= game.getId() %>">
+                <input type="hidden" name="id" value="<%= game.getId() %>">
+                <input type="hidden" name="title" value="<%= game.getTitle() %>">
                 <!-- Add other hidden fields as needed -->
 
                 <div class="game-card">
@@ -186,7 +188,7 @@
         %>
     </div>
 </div>
-
+<!-- ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN -->
 
 <!-- Footer -->
 <footer class="text-white text-center py-3">
@@ -196,5 +198,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+    var eventSource = new EventSource("GamesServlet");
+
+    eventSource.onmessage = function (event) {
+        // Update the content on your home page with the retrieved data
+        var gamesContainer = document.getElementById('games-container');
+        gamesContainer.innerHTML += event.data;
+    };
+</script>
 </body>
 </html>
