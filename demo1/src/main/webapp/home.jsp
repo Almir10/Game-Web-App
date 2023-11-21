@@ -149,24 +149,26 @@
             if (games != null) {
                 for (Games game : games) {
         %>
-        <form action="AddToCart" method="post" accept-charset="UTF-8">
-            <input type="hidden" name="id" value="<%= game.getId() %>">
-            <input type="hidden" name="title" value="<%= game.getTitle() %>">
-            <!-- Add other hidden fields as needed -->
+        <div class="col-md-4">
+            <form action="AddToCart" method="post" accept-charset="UTF-8">
+                <input type="hidden" name="id" value="<%= game.getId() %>">
+                <input type="hidden" name="title" value="<%= game.getTitle() %>">
+                <!-- Add other hidden fields as needed -->
 
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top rounded" src="<%= game.getLogo() %>" alt="<%= game.getTitle() %>">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= game.getTitle() %></h5>
-                        <p class="card-text">Price: $<%= game.getPrice() %> USD</p>
-                        <div class="text-center my-4">
-                            <button type="submit" class="btn btn-info">Add to cart</button>
+                <div class="game-card">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top rounded" src="<%= game.getLogo() %>" alt="<%= game.getTitle() %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= game.getTitle() %></h5>
+                            <p class="card-text">Price: $<%= game.getPrice() %> USD</p>
+                            <div class="text-center my-4">
+                                <button type="submit" class="btn btn-info">Add to cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
         <%
                 } // end for loop
             } else {

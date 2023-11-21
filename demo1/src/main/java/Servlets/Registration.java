@@ -29,9 +29,9 @@ public class Registration extends HttpServlet{
             }
 
             // Povezivanje na bazu podataka
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ucenje", "root", "almir12345")) {
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
                 // Provera da li korisnik već postoji u bazi podataka
-                String checkUserQuery = "SELECT * FROM tabela WHERE username=?";
+                String checkUserQuery = "SELECT * FROM users WHERE username=?";
                 try (PreparedStatement checkUserStatement = connection.prepareStatement(checkUserQuery)) {
                     checkUserStatement.setString(1, username);
 
