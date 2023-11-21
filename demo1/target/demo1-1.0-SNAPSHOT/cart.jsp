@@ -1,67 +1,41 @@
-<%@ page import="Beans.Games" %>
-<%@ page import="Beans.Orders" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Beans.Orders" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.ArrayList" %>
+
 <html>
 <head>
-    <title>Cart</title>
+    <title>Shopping Cart</title>
 </head>
 <body>
+<h2>Your Shopping Cart</h2>
 
-<h2>Your Cart</h2>
+<% List<Orders> cartItems = (List<Orders>) request.getAttribute("cartItems"); %>
 
-<%
-    // Get the shopping cart from the session
-    Orders cart = (Orders) session.getAttribute("cart");
-    System.out.println("Cart: " + cart);
-
-    // Check if the cart is not null and has items
-    if (cart != null && !cart.getCartItems().isEmpty()) {
-%>
+<% if (cartItems != null && !cartItems.isEmpty()) { %>
 <table border="1">
-    <thead>
     <tr>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Logo</th>
-        <th>Quantity</th>
+        <th>Product ID</th>
+        <th>Action</th>
     </tr>
-    </thead>
-    <tbody>
 
-    <!-- Iterate through the games in the cart -->
-    <%
-        for (Games game : cart.getCartItems()) {
-    %>
+    <% for (Orders cartItem : cartItems) { %>
     <tr>
-        <td><%= game.getTitle() %></td>
-        <td><%= game.getPrice() %></td>
-        <td><img src="<%= game.getLogo() %>" alt="<%= game.getTitle() %> Logo" width="50" height="50"></td>
+        <td><%= cartItem.getGameId() %></td>
         <td>
-            <!-- Form to update quantity -->
-            <form action="UpdateCart" method="post" accept-charset="UTF-8">
-                <input type="hidden" name="gameId" value="<%= game.getId() %>">
-                <input type="number" name="quantity" value="<%= game.getQuantity() %>" min="1">
-                <button type="submit">Update</button>
+            <form action="removeFromCart" method="post">
+                <input type="hidden" name="userId" value="<%= cartItem.getUserId() %>" />
+                <input type="hidden" name="productId" value="<%= cartItem.getGameId() %>" />
+                <input type="submit" value="Remove from Cart" />
             </form>
         </td>
     </tr>
-    <%
-        }
-    %>
-
-
-    </tbody>
+    <% } %>
 </table>
-
-<%
-} else {
-%>
-
+<% } else { %>
 <p>Your cart is empty.</p>
-
-<%
-    }
-%>
-
+<% } %>
 </body>
 </html>
+

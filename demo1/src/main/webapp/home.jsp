@@ -107,7 +107,7 @@
             <% if (username != null) { %>
             <!-- Display the "Cart" link only if the user is logged in -->
             <li class="nav-item">
-                <a class="nav-link" href="cart.jsp">Cart</a>
+                <a class="nav-link" href="Cart">Cart</a>
             </li>
             <% } %>
         </div>
@@ -160,8 +160,7 @@
         %>
         <div class="col-md-4">
             <form action="AddToCart" method="post" accept-charset="UTF-8">
-                <input type="hidden" name="id" value="<%= game.getId() %>">
-                <input type="hidden" name="title" value="<%= game.getTitle() %>">
+                <input type="hidden" name="gameId" value="<%= game.getId() %>">
                 <!-- Add other hidden fields as needed -->
 
                 <div class="game-card">
