@@ -18,21 +18,7 @@ import Beans.Users;
 
 @WebServlet(name = "Igre", urlPatterns = {"/Games"})
 
-/*public class Igre extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        IgreDAO igreDAO = new IgreDAO();
-        List<Games> games = igreDAO.getAllGames();
-        System.out.println("Ucitano");
-        request.setAttribute("games", games);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("games.jsp");
-        dispatcher.forward(request, response);
-    }
-    public void init(){
-        System.out.println("Ucitalo se");
-    }
-
-}*/
 public class Igre extends HttpServlet {
 
     public void init() {
