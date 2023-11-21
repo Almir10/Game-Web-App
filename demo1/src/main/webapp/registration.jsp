@@ -2,10 +2,120 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registration</title>
 </head>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+    body {
+        background-color: #f8f9fa; /* Bijela pozadina */
+    }
+
+    .navbar {
+        background-color: #007bff; /* Plava boja za navigacionu traku */
+    }
+
+    .jumbotron {
+        background-color: #007bff; /* Plava boja za herojsku sekciju */
+        color: #fff; /* Bijeli tekst */
+        margin-bottom: 0; /* Uklonite dodatni prostor ispod hero sekcije */
+    }
+
+    .game-card {
+        background-color: #fff; /* Bijela pozadina za proizvode */
+        border: 1px solid #007bff; /* Plava ivica za proizvode */
+        border-radius: 10px; /* Zaobljeni rubovi kartica */
+        margin-bottom: 20px;
+        text-align: center; /* Centrirajte tekst */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodajte senku za efekat podizanja kartica */
+    }
+
+    .game-card img {
+        max-width: 100%; /* Povećajte maksimalnu širinu slike */
+        max-height: 200px; /* Povećajte maksimalnu visinu slike */
+        object-fit: cover; /* Osigurajte da se slika proporcionalno uklapa */
+        border-bottom: 1px solid #007bff; /* Plavi donji ivičnjak za sliku */
+        border-radius: 10px 10px 0 0; /* Zaobljeni rubovi samo na vrhu slike */
+    }
+
+    .game-card .card-body {
+        padding: 20px; /* Povećajte prostor unutar kartice */
+    }
+
+    .game-card .card-title {
+        color: #007bff; /* Plava boja za naslov proizvoda */
+        font-size: 18px; /* Postavite veličinu naslova */
+        margin-bottom: 10px; /* Dodajte razmak ispod naslova */
+    }
+
+    .game-card .card-text {
+        font-size: 16px; /* Postavite veličinu teksta */
+    }
+
+    .game-card button {
+        background-color: #007bff; /* Plava boja za dugme */
+        color: #fff; /* Beli tekst na dugmetu */
+        width: 80%; /* Smanjite širinu dugmeta */
+        margin-top: 15px; /* Dodajte razmak iznad dugmeta */
+    }
+
+    footer {
+        background-color: #007bff; /* Plava boja za footer */
+        color: #fff; /* Bijeli tekst za footer */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px 0; /* Povećajte prostor unutar footera */
+    }
+</style>
+
 <body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">Gaming Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav ml-auto">
+            <!-- ... other list items ... -->
+            <li class="nav-item active">
+                <a class="nav-link" href="Games">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Games">Games</a>
+            </li>
+            <% String username = (String) session.getAttribute("username"); %>
+            <% if (username != null) { %>
+            <!-- User is logged in -->
+            <span class="navbar-text">
+                Welcome, <%= username %> <!-- Display the username -->
+            </span>
+            <li class="nav-item">
+                <form class="form-inline" action="Logout" method="post">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+                </form>
+            </li>
+            <% } else { %>
+            <!-- User is not logged in -->
+            <li class="nav-item">
+                <a class="nav-link" href="login.jsp">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="registration.jsp">Registration</a>
+            </li>
+            <% } %>
+            <% if (username != null) { %>
+            <!-- Display the "Cart" link only if the user is logged in -->
+            <li class="nav-item">
+                <a class="nav-link" href="registration.jsp">Registration</a>
+            </li>
+            <% } %>
+        </div>
+    </div>
+</nav>
 
 <section class="vh-100">
     <div class="container py-5 h-100">
@@ -50,10 +160,6 @@
 
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Registruj se</button>
-
-                    <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                    </div>
 
                     <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="login.jsp"
                        role="button">

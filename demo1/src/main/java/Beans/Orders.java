@@ -4,6 +4,16 @@ public class Orders {
     int id;
     String userId;
     String gameId;
+    String gameTitle;
+    float GamePrice;
+    public float getGamePrice() {
+        return GamePrice;
+    }
+
+    public void setGamePrice(float gamePrice) {
+        GamePrice = gamePrice;
+    }
+
 
     public String getGameTitle() {
         return gameTitle;
@@ -13,7 +23,7 @@ public class Orders {
         this.gameTitle = gameTitle;
     }
 
-    String gameTitle;
+
 
     public int getId() {
         return id;
