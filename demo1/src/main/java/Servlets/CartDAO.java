@@ -11,7 +11,7 @@ public class CartDAO {
     public static List<Orders> getCartItems(String userId) {
         List<Orders> cartItems = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "adis1")) {
             System.out.println("Successfully connected to the database");
             String query = "select o.id, o.userId, g.title from orders o\n" +
                             "join games g on o.gameId = g.id\n" +
@@ -39,7 +39,7 @@ public class CartDAO {
     }
 
     public static void addToCart(Integer userId, String gameId) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "adis1")) {
             String query = "INSERT INTO orders (userId, gameId) VALUES (?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, userId);

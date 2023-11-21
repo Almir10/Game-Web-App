@@ -21,8 +21,7 @@ import Beans.Users;
 
 public class Igre extends HttpServlet {
 
-    public void init() {
-        // Load games during initialization and store in the servlet context or another appropriate location
+    private void loadGames() {
         IgreDAO igreDAO = new IgreDAO();
         List<Games> games = igreDAO.getAllGames();
         getServletContext().setAttribute("allGames", games);
@@ -30,6 +29,9 @@ public class Igre extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Load or reload games when the servlet is called
+        loadGames();
+
         // Retrieve the games from the servlet context
         List<Games> games = (List<Games>) getServletContext().getAttribute("allGames");
 
@@ -39,22 +41,5 @@ public class Igre extends HttpServlet {
         // Forward the request to the home.jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
         dispatcher.forward(request, response);
-
-        response.setContentType("text/event-stream");
-        response.setCharacterEncoding("UTF-8");
-
-        // Send each game as an SSE message
-        for (Games game : games) {
-            String eventData = "data: " + game.getTitle() + ", " + game.getPrice() + "\n\n";
-            response.getWriter().write(eventData);
-            response.getWriter().flush();
-
-            // Introduce a delay if needed
-            try {
-                Thread.sleep(1000); // Adjust the delay as needed
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

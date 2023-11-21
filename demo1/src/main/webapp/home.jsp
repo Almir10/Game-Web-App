@@ -66,6 +66,12 @@
             width: 100%;
             padding: 10px 0; /* Povećajte prostor unutar footera */
         }
+        #brisi{
+            background-color: crimson;
+        }
+        #brisi:hover{
+            background-color: #B30225FF;
+        }
     </style>
 </head>
 <body>
@@ -80,34 +86,48 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav ml-auto">
-            <!-- ... other list items ... -->
+            <% String username = (String) session.getAttribute("username"); %>
+            <% String adminUsername = (String) session.getAttribute("adminUsername"); %>
+
+            <% if (adminUsername != null) { %>
+            <!-- Admin is logged in -->
+            <span class="navbar-text">
+                Welcome, <strong><%= adminUsername %></strong> <!-- Display the admin username -->
+                </span>
+            <li class="nav-item">
+                <a class="nav-link" href="adminAddGame.jsp">Dashboard</a>
+            </li>
+
+            <form class="form-inline" action="Logout" method="post">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+            <% } else if (username != null) { %>
+            <!-- Regular user is logged in -->
+            <span class="navbar-text">
+                Welcome, <strong><%= username %></strong> <!-- Display the username -->
+                </span>
+            <li class="nav-item">
+                <form class="form-inline" action="Logout" method="post">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Cart">Cart</a>
+            </li>
+            <!-- Add other navigation links for regular users as needed -->
+            <% } else { %>
+            <!-- No user is logged in (guest) -->
             <li class="nav-item active">
                 <a class="nav-link" href="Games">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Games">Games</a>
             </li>
-            <% String username = (String) session.getAttribute("username"); %>
-            <% if (username != null) { %>
-            <!-- User is logged in -->
-            <span class="navbar-text">
-                Welcome, <%= username %> <!-- Display the username -->
-            </span>
-            <li class="nav-item">
-                <form class="form-inline" action="Logout" method="post">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
-                </form>
-            </li>
-            <% } else { %>
-            <!-- User is not logged in -->
             <li class="nav-item">
                 <a class="nav-link" href="login.jsp">Login</a>
             </li>
-            <% } %>
-            <% if (username != null) { %>
-            <!-- Display the "Cart" link only if the user is logged in -->
             <li class="nav-item">
-                <a class="nav-link" href="Cart">Cart</a>
+                <a class="nav-link" href="registration.jsp">Registration</a>
             </li>
             <% } %>
         </div>
@@ -159,7 +179,7 @@
                 for (Games game : games) {
         %>
         <div class="col-md-4">
-            <form action="AddToCart" method="post" accept-charset="UTF-8">
+            <form action="<%= adminUsername != null ? "DeleteGame" : "AddToCart" %>" method="post" accept-charset="UTF-8">
                 <input type="hidden" name="gameId" value="<%= game.getId() %>">
                 <!-- Add other hidden fields as needed -->
 
@@ -170,7 +190,11 @@
                             <h5 class="card-title"><%= game.getTitle() %></h5>
                             <p class="card-text">Price: $<%= game.getPrice() %> USD</p>
                             <div class="text-center my-4">
+                                <% if (adminUsername != null) { %>
+                                <button type="submit" class="btn btn-danger delete-button" id="brisi">Delete</button>
+                                <% } else { %>
                                 <button type="submit" class="btn btn-info">Add to cart</button>
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -178,12 +202,14 @@
             </form>
         </div>
         <%
-                } // end for loop
+                }
             } else {
-                // Handle the case when games is null (optional)
                 out.println("No games available.");
             }
         %>
+    </div>
+</div>
+
     </div>
 </div>
 

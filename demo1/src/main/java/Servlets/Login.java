@@ -28,6 +28,8 @@ public class Login extends HttpServlet {
 
                         ResultSet result = statement.executeQuery();
 
+
+
                         if (result.next()) {
                                 // Check the user role
                                 String role = result.getString("role");
@@ -37,12 +39,14 @@ public class Login extends HttpServlet {
                                 if ("admin".equals(role)) {
                                         // Admin is successfully logged in
                                         session.setAttribute("adminUsername", result.getString("username"));
+                                        session.setAttribute("isAdmin", true);
                                         // Redirect to admin page
                                         res.sendRedirect("adminAddGame.jsp"); // Assuming you have an admin section mapped to "/admin"
                                 } else {
                                         // Regular user is successfully logged in
                                         session.setAttribute("id", result.getInt("id"));
                                         session.setAttribute("username", result.getString("username"));
+                                        session.setAttribute("isAdmin", false);
                                         // Redirect to a welcome page or display a message
                                         res.sendRedirect("Games");
                                 }
