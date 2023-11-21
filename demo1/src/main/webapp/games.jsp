@@ -20,9 +20,12 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">SVE IGRE</h2>
     <div class="row">
-        <% List<Games> games = (List<Games>) request.getAttribute("games");
+        <%
+            List<Games> games = (List<Games>) request.getAttribute("games");
 
-            for (Games game : games) { %>
+            if (games != null) {
+                for (Games game : games) {
+        %>
         <form action="AddToCart" method="post" accept-charset="UTF-8">
             <input type="hidden" name="id" value="<%= game.getId() %>">
             <input type="hidden" name="title" value="<%= game.getTitle() %>">
@@ -42,7 +45,13 @@
                 </div>
             </div>
         </form>
-        <% } %>
+        <%
+                } // end for loop
+            } else {
+                // Handle the case when games is null (optional)
+                out.println("No games available.");
+            }
+        %>
     </div>
 </div>
 

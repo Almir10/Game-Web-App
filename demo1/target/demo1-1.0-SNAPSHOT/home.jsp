@@ -17,30 +17,54 @@
         .jumbotron {
             background-color: #007bff; /* Plava boja za herojsku sekciju */
             color: #fff; /* Bijeli tekst */
+            margin-bottom: 0; /* Uklonite dodatni prostor ispod hero sekcije */
         }
 
-        .card {
+        .game-card {
             background-color: #fff; /* Bijela pozadina za proizvode */
             border: 1px solid #007bff; /* Plava ivica za proizvode */
+            border-radius: 10px; /* Zaobljeni rubovi kartica */
+            margin-bottom: 20px;
+            text-align: center; /* Centrirajte tekst */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodajte senku za efekat podizanja kartica */
         }
 
-        .card-title {
+        .game-card img {
+            max-width: 100%; /* Povećajte maksimalnu širinu slike */
+            max-height: 200px; /* Povećajte maksimalnu visinu slike */
+            object-fit: cover; /* Osigurajte da se slika proporcionalno uklapa */
+            border-bottom: 1px solid #007bff; /* Plavi donji ivičnjak za sliku */
+            border-radius: 10px 10px 0 0; /* Zaobljeni rubovi samo na vrhu slike */
+        }
+
+        .game-card .card-body {
+            padding: 20px; /* Povećajte prostor unutar kartice */
+        }
+
+        .game-card .card-title {
             color: #007bff; /* Plava boja za naslov proizvoda */
+            font-size: 18px; /* Postavite veličinu naslova */
+            margin-bottom: 10px; /* Dodajte razmak ispod naslova */
         }
 
-        .btn-outline-secondary {
-            color: #007bff; /* Plava boja za dugmad */
-            border-color: #007bff; /* Plava boja ivice za dugmad */
+        .game-card .card-text {
+            font-size: 16px; /* Postavite veličinu teksta */
         }
 
-        .btn-outline-secondary:hover {
-            background-color: #007bff; /* Plava boja pozadine prilikom hover-a na dugmad */
-            color: #fff; /* Bijeli tekst prilikom hover-a na dugmad */
+        .game-card button {
+            background-color: #007bff; /* Plava boja za dugme */
+            color: #fff; /* Beli tekst na dugmetu */
+            width: 80%; /* Smanjite širinu dugmeta */
+            margin-top: 15px; /* Dodajte razmak iznad dugmeta */
         }
 
         footer {
             background-color: #007bff; /* Plava boja za footer */
             color: #fff; /* Bijeli tekst za footer */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 0; /* Povećajte prostor unutar footera */
         }
     </style>
 </head>
@@ -101,7 +125,7 @@
 
 <!-- Search and Sort Section -->
 <div class="container mt-3">
-    <form class="form-inline">
+    <form class="form-inline" action="GameFilterServlet" method="post">
         <!-- Search Bar -->
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
 

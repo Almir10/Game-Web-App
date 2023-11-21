@@ -9,10 +9,10 @@ import java.util.List;
 public class IgreDAO {
 
 
-    public List<Games> getAllGames() {
+    public static List<Games> getAllGames() {
         List<Games> games = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ucenje", "root", "almir12345")) {
             System.out.println("Uspesno povezan s bazom podataka");
             String query = "SELECT id, title, price, logo FROM games";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -37,4 +37,29 @@ public class IgreDAO {
 
         return games;
     }
+
+    public static List<Games> getFilteredGames(String search, String sort) {
+        List<Games> filteredGames = new ArrayList<>();
+        List<Games> allGames = getAllGames();
+
+        // Logika za filtriranje na osnovu pretrage
+        for (Games game : allGames) {
+            if (game.getTitle().toLowerCase().contains(search.toLowerCase())) {
+                filteredGames.add(game);
+            }
+        }
+
+        // Logika za sortiranje
+        if ("price".equals(sort)) {
+            // Sortirajte po ceni
+            filteredGames.sort((g1, g2) -> Double.compare(g1.getPrice(), g2.getPrice()));
+        } else if ("name".equals(sort)) {
+            // Sortirajte po imenu
+            filteredGames.sort((g1, g2) -> g1.getTitle().compareToIgnoreCase(g2.getTitle()));
+        }
+
+        return filteredGames;
+    }
 }
+
+
