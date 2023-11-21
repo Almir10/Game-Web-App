@@ -17,7 +17,7 @@ public class DB {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "adis1");
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "adis1");
 
         } catch (Exception e) {
             e.printStackTrace();
