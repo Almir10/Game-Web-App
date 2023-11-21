@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/demo1/src/main/java/Servlets/CartDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/demo1/src/main/java/Servlets/Login.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/demo1/src/main/java/Servlets/Registration.java" dialect="GenericSQL" />
   </component>

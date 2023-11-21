@@ -1,101 +1,41 @@
-<%@ page import="Beans.Games" %>
-<%@ page import="Beans.Orders" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Beans.Orders" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.ArrayList" %>
+
 <html>
 <head>
-    <title>Cart</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa; /* Bijela pozadina */
-        }
-
-        h2 {
-            color: #007bff; /* Plava boja za naslov */
-        }
-
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #007bff; /* Plavi okvir za ćelije */
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #007bff; /* Plava pozadina za zaglavlje tabele */
-            color: #fff; /* Beli tekst za zaglavlje tabele */
-        }
-
-        img {
-            max-width: 50px; /* Maksimalna širina slike */
-            max-height: 50px; /* Maksimalna visina slike */
-        }
-
-        p {
-            color: #007bff; /* Plava boja teksta */
-        }
-    </style>
+    <title>Shopping Cart</title>
 </head>
 <body>
+<h2>Your Shopping Cart</h2>
 
-<div class="container">
-    <h2>Your Cart</h2>
+<% List<Orders> cartItems = (List<Orders>) request.getAttribute("cartItems"); %>
 
-    <%-- Get the shopping cart from the session --%>
-    <%
-        Orders cart = (Orders) session.getAttribute("cart");
-        System.out.println("Cart: " + cart);
+<% if (cartItems != null && !cartItems.isEmpty()) { %>
+<table border="1">
+    <tr>
+        <th>Product ID</th>
+        <th>Action</th>
+    </tr>
 
-        // Check if the cart is not null and has items
-        if (cart != null && !cart.getCartItems().isEmpty()) {
-    %>
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Logo</th>
-            <th>Quantity</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <%-- Iterate through the games in the cart --%>
-        <%
-            for (Games game : cart.getCartItems()) {
-        %>
-        <tr>
-            <td><%= game.getTitle() %></td>
-            <td>$<%= game.getPrice() %></td>
-            <td><img src="<%= game.getLogo() %>" alt="<%= game.getTitle() %> Logo"></td>
-            <td>
-                <%-- Form to update quantity --%>
-                <form action="UpdateCart" method="post" accept-charset="UTF-8">
-                    <input type="hidden" name="gameId" value="<%= game.getId() %>">
-                    <input type="number" name="quantity" value="<%= game.getQuantity() %>" min="1">
-                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
-                </form>
-            </td>
-        </tr>
-        <%
-            }
-        %>
-
-        </tbody>
-    </table>
-    <%
-    } else {
-    %>
-    <p>Your cart is empty.</p>
-    <%
-        }
-    %>
-</div>
-
+    <% for (Orders cartItem : cartItems) { %>
+    <tr>
+        <td><%= cartItem.getGameId() %></td>
+        <td>
+            <form action="removeFromCart" method="post">
+                <input type="hidden" name="userId" value="<%= cartItem.getUserId() %>" />
+                <input type="hidden" name="productId" value="<%= cartItem.getGameId() %>" />
+                <input type="submit" value="Remove from Cart" />
+            </form>
+        </td>
+    </tr>
+    <% } %>
+</table>
+<% } else { %>
+<p>Your cart is empty.</p>
+<% } %>
 </body>
 </html>
+
