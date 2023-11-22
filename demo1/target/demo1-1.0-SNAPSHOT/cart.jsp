@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Beans.Orders" %>
+<%@ page import="Beans.Kart" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -118,7 +118,7 @@
 
 <%-- Retrieve cart items from the request attribute --%>
 <%
-    List<Orders> cartItems = (List<Orders>) request.getAttribute("cartItems");
+    List<Kart> cartItems = (List<Kart>) request.getAttribute("cartItems");
 %>
 
 <%-- Display the cart items in a table --%>
@@ -131,7 +131,7 @@
     </tr>
 
     <%-- Iterate over cart items and display them in the table --%>
-    <% for (Orders cartItem : cartItems) { %>
+    <% for (Kart cartItem : cartItems) { %>
     <tr>
         <td><%= cartItem.getGameTitle() %></td>
         <td><%= cartItem.getGamePrice() %></td>
@@ -150,8 +150,8 @@
 <p>Your cart is empty.</p>
 <% } else { %>
 <!-- Dodaj gumb za dovršetak narudžbe ako košarica nije prazna -->
-<form action="FinishOrder" method="post">
-    <input type="submit" value="Finish Order" class="btn btn-primary" />
+<form action="NapraviNarudzbu" method="post">
+    <input type="submit" value="Napravi Narudzbu" class="btn btn-primary" />
 </form>
 <% } %>
 

@@ -150,8 +150,8 @@
 <p>Your cart is empty.</p>
 <% } else { %>
 <!-- Dodaj gumb za dovršetak narudžbe ako košarica nije prazna -->
-<form action="FinishOrder" method="post">
-    <input type="submit" value="Finish Order" class="btn btn-primary" />
+<form action="NapraviNarudzbu" method="post">
+    <input type="submit" value="Napravi Narudzbu" class="btn btn-primary" />
 </form>
 <% } %>
 

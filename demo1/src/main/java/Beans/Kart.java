@@ -1,12 +1,14 @@
 package Beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Kart {
     int id;
     int userId;
     int gameId;
     String gameTitle;
     float GamePrice;
-
 
 
 
@@ -36,6 +38,8 @@ public class Kart {
     public int getUserId() {
         return userId;
     }
+
+
 
     public int getGameId() {
         return this.gameId;

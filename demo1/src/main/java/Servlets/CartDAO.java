@@ -11,8 +11,8 @@ public class CartDAO {
     public static List<Kart> getCartItems(Integer userId) {
         List<Kart> cartItems = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
-            String query = "select o.id as id , o.userId as userId, g.title as title, g.price as price from orders as o " +
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "almir12345")) {
+            String query = "select o.id as id , o.userId as userId, g.title as title, g.price as price, o.gameId as gameId from cart as o " +
                     "                            join games as g on o.gameId = g.id " +
                     "                            where o.userId=?;";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -25,6 +25,7 @@ public class CartDAO {
                         cartItem.setUserId(resultSet.getInt("userId"));
                         cartItem.setGameTitle(resultSet.getString("title"));
                         cartItem.setGamePrice(resultSet.getFloat("price"));
+                        cartItem.setGameId(resultSet.getInt("gameId"));
                         cartItems.add(cartItem);
                     }
                 }
@@ -40,7 +41,7 @@ public class CartDAO {
 
     public static void addToCart(Integer userId, String gameId) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
-            String query = "INSERT INTO orders (userId, gameId) VALUES (?, ?)";
+            String query = "INSERT INTO cart (userId, gameId) VALUES (?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, userId);
                 preparedStatement.setInt(2, Integer.parseInt(gameId));
@@ -56,7 +57,7 @@ public class CartDAO {
 
     public static void removeFromCart(String orderId) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
-            String query = "DELETE FROM orders WHERE id = ?";
+            String query = "DELETE FROM cart WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, orderId);
                 preparedStatement.executeUpdate();

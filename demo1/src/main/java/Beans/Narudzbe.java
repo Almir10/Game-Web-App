@@ -7,9 +7,10 @@ import java.util.List;
 public class Narudzbe {
     private int id;
     private int userId;
+
+    private int gameId;
     private Date orderDate;
     private String status;
-
     private List<Kart> stavke;
 
 
