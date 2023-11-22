@@ -182,7 +182,6 @@
             <form action="<%= adminUsername != null ? "DeleteGame" : "AddToCart" %>" method="post" accept-charset="UTF-8">
                 <input type="hidden" name="gameId" value="<%= game.getId() %>">
                 <!-- Add other hidden fields as needed -->
-
                 <div class="game-card">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top rounded" src="<%= game.getLogo() %>" alt="<%= game.getTitle() %>">
@@ -216,11 +215,18 @@
 
 <!-- Footer -->
 <footer class="text-white text-center py-3">
-    <p>&copy; 2023 Gaming Shop. All rights reserved.</p>
+    <p>&copy; 2023 Gaming Shop. All rights reserved...</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Gde god želite prikazati igre, dodajte sledeći HTML kod -->
+<div id="gameContainer"></div>
+
 </body>
 </html>

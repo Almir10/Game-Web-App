@@ -93,7 +93,7 @@
         <div class="navbar-nav ml-auto">
             <!-- ... other list items ... -->
             <li class="nav-item">
-                <a class="nav-link" href="Games">Games</a>
+                <a class="nav-link" href="home.jsp">Home</a>
             </li>
             <% String username = (String) session.getAttribute("username"); %>
             <% if (username != null) { %>

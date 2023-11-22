@@ -1,12 +1,11 @@
 package Servlets;
 
-import jakarta.persistence.criteria.Order;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Beans.Orders;
+import Beans.Kart;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpSession;
 
@@ -20,7 +19,7 @@ public class Cart extends HttpServlet {
         System.out.println("Pozvan");
         Integer userId = (Integer) session.getAttribute("id"); // Assuming userId is passed as a parameter
         // Retrieve cart items from the database
-        List<Orders> cartItems = CartDAO.getCartItems(userId);
+        List<Kart> cartItems = CartDAO.getCartItems(userId);
 
         // Set the cart items as a request attribute
         request.setAttribute("cartItems", cartItems);

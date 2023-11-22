@@ -12,7 +12,7 @@ public class IgreDAO {
     public static List<Games> getAllGames() {
         List<Games> games = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopDB", "root", "almir12345")) {
             System.out.println("Uspesno povezan s bazom podataka");
             String query = "SELECT id, title, price, logo FROM games";
             try (PreparedStatement statement = connection.prepareStatement(query)) {

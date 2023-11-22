@@ -4,14 +4,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import Beans.Orders;
+import Beans.Kart;
 
 public class CartDAO {
 
-    public static List<Orders> getCartItems(Integer userId) {
-        List<Orders> cartItems = new ArrayList<>();
+    public static List<Kart> getCartItems(Integer userId) {
+        List<Kart> cartItems = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
             String query = "select o.id as id , o.userId as userId, g.title as title, g.price as price from orders as o " +
                     "                            join games as g on o.gameId = g.id " +
                     "                            where o.userId=?;";
@@ -20,9 +20,9 @@ public class CartDAO {
 
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
-                        Orders cartItem = new Orders();
+                        Kart cartItem = new Kart();
                         cartItem.setId(resultSet.getInt("id"));
-                        cartItem.setUserId(resultSet.getString("userId"));
+                        cartItem.setUserId(resultSet.getInt("userId"));
                         cartItem.setGameTitle(resultSet.getString("title"));
                         cartItem.setGamePrice(resultSet.getFloat("price"));
                         cartItems.add(cartItem);
@@ -39,7 +39,7 @@ public class CartDAO {
     }
 
     public static void addToCart(Integer userId, String gameId) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
             String query = "INSERT INTO orders (userId, gameId) VALUES (?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, userId);
@@ -55,7 +55,7 @@ public class CartDAO {
     }
 
     public static void removeFromCart(String orderId) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "orhan123")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameshopdb", "root", "almir12345")) {
             String query = "DELETE FROM orders WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, orderId);
