@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Beans.Users;
 
@@ -108,6 +110,55 @@ public class NarudzbeDAO {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "almir12345";
 
+
+    public static List<Narudzbe> getAllOrders(int userId) {
+        List<Narudzbe> orders = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+            String query = "SELECT n.id, n.userId, n.datumNarudzbe, n.statusNarudzbe, ns.gameId, ns.cijenaStavke " +
+                    "FROM narudzba n " +
+                    "LEFT JOIN narudzba_stavke ns ON n.id = ns.narudzbaId " +
+                    "WHERE n.userId = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, userId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+
+                    Map<Integer, Narudzbe> orderMap = new HashMap<>();
+
+                    while (resultSet.next()) {
+                        int orderId = resultSet.getInt("id");
+                        Narudzbe order = orderMap.get(orderId);
+
+                        if (order == null) {
+                            order = new Narudzbe();
+                            order.setId(orderId);
+                            order.setUserId(resultSet.getInt("id"));
+                            order.setOrderDate(resultSet.getDate("datumNarudzbe"));
+                            order.setStatus(resultSet.getString("statusNarudzbe"));
+                            order.setStavke(new ArrayList<>());
+                            orderMap.put(orderId, order);
+                        }
+
+                        int gameId = resultSet.getInt("gameId");
+                        if (gameId > 0) {
+                            Kart stavka = new Kart();
+                            stavka.setGameId(gameId);
+                            stavka.setGamePrice(resultSet.getFloat("cijenaStavke"));
+                            order.getStavke().add(stavka);
+                        }
+                    }
+
+                    orders.addAll(orderMap.values());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Orders for user with userId " + userId + ": " + orders.size());
+        return orders;
+    }
+
     public static void prebaciUKorpu(int userId) {
         System.out.println("Funkcija je pozvana");
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
@@ -163,6 +214,8 @@ public class NarudzbeDAO {
             e.printStackTrace();
             // Handle the exception according to your application's requirements
         }
+
+
     }}
 
 

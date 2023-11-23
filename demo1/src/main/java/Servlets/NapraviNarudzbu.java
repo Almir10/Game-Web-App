@@ -1,20 +1,15 @@
 package Servlets;
 
-
-import jakarta.servlet.annotation.WebServlet;
-
-
-
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.util.List;
 
 @WebServlet(name="NapraviNarudzbu", urlPatterns={"/NapraviNarudzbu"})
 public class NapraviNarudzbu extends HttpServlet {
@@ -40,6 +35,6 @@ public class NapraviNarudzbu extends HttpServlet {
         NarudzbeDAO.prebaciUKorpu(userId);
 
         // Redirect to a confirmation page or any other page
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("Narudzbe");
     }
 }

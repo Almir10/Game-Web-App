@@ -92,20 +92,19 @@
             <% if (adminUsername != null) { %>
             <!-- Admin is logged in -->
             <span class="navbar-text">
-                Welcome, <strong><%= adminUsername %></strong> <!-- Display the admin username -->
-                </span>
+            Welcome, <strong><%= adminUsername %></strong> <!-- Display the admin username -->
+        </span>
             <li class="nav-item">
                 <a class="nav-link" href="adminAddGame.jsp">Dashboard</a>
             </li>
-
-            <form class="form-inline" action="Logout" method="post">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
-            </form>
+            <li class="nav-item">
+                <a class="nav-link" href="Narudzbe">Narudzbe</a>
+            </li>
             <% } else if (username != null) { %>
             <!-- Regular user is logged in -->
             <span class="navbar-text">
-                Welcome, <strong><%= username %></strong> <!-- Display the username -->
-                </span>
+            Welcome, <strong><%= username %></strong> <!-- Display the username -->
+        </span>
             <li class="nav-item">
                 <form class="form-inline" action="Logout" method="post">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
@@ -113,6 +112,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Cart">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Narudzbe">Prikazi Narudzbe</a>
             </li>
             <!-- Add other navigation links for regular users as needed -->
             <% } else { %>
