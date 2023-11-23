@@ -17,6 +17,34 @@
     <title>Orders</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Add your custom styles here -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bijela pozadina */
+        }
+
+        .navbar {
+            background-color: #007bff; /* Plava boja za navigacionu traku */
+        }
+
+        .jumbotron {
+            background-color: #007bff; /* Plava boja za herojsku sekciju */
+            color: #fff; /* Bijeli tekst */
+            margin-bottom: 0; /* Uklonite dodatni prostor ispod hero sekcije */
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .btn-link {
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <!-- Navigation Bar -->
@@ -28,21 +56,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="Games">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Games">Games</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Cart">Cart</a>
-            </li>
-            <!-- Add more links as needed -->
+            <!-- Add your navigation links here -->
         </div>
     </div>
 </nav>
 
-<div class="container mt-5">
+<div class="container">
     <h2>Orders</h2>
 
     <%-- Retrieve orders from the request attribute --%>
@@ -75,10 +94,13 @@
         <tr id="gamesRow<%= order.getId() %>" style="display: none;">
             <td colspan="4">
                 <!-- Add code here to display games within the order -->
+                <% float totalPrice = 0; %>
                 <% if (order.getStavke() != null && !order.getStavke().isEmpty()) { %>
                 <% for (Kart stavka : order.getStavke()) { %>
                 <div><%= stavka.getGameTitle() %> - <%= stavka.getGamePrice() %></div>
+                <% totalPrice += stavka.getGamePrice(); %>
                 <% } %>
+                <div>Total Price: $<%= totalPrice %></div> <!-- Display total price -->
                 <% } else { %>
                 <p>No games in this order.</p>
                 <% } %>
@@ -110,7 +132,7 @@
     </script>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
