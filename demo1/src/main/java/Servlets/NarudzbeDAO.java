@@ -115,9 +115,10 @@ public class NarudzbeDAO {
         List<Narudzbe> orders = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String query = "SELECT n.id, n.userId, n.datumNarudzbe, n.statusNarudzbe, ns.gameId, ns.cijenaStavke " +
+            String query = "SELECT n.id, n.userId, n.datumNarudzbe, n.statusNarudzbe, ns.gameId, ns.cijenaStavke, g.title " +
                     "FROM narudzba n " +
                     "LEFT JOIN narudzba_stavke ns ON n.id = ns.narudzbaId " +
+                    "LEFT JOIN games g ON ns.gameId = g.id " +  // Dodat LEFT JOIN sa tabelom games
                     "WHERE n.userId = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, userId);
@@ -132,7 +133,7 @@ public class NarudzbeDAO {
                         if (order == null) {
                             order = new Narudzbe();
                             order.setId(orderId);
-                            order.setUserId(resultSet.getInt("id"));
+                            order.setUserId(resultSet.getInt("userId"));
                             order.setOrderDate(resultSet.getDate("datumNarudzbe"));
                             order.setStatus(resultSet.getString("statusNarudzbe"));
                             order.setStavke(new ArrayList<>());
@@ -144,6 +145,7 @@ public class NarudzbeDAO {
                             Kart stavka = new Kart();
                             stavka.setGameId(gameId);
                             stavka.setGamePrice(resultSet.getFloat("cijenaStavke"));
+                            stavka.setGameTitle(resultSet.getString("title"));  // Dodato dohvatanje title iz games tabele
                             order.getStavke().add(stavka);
                         }
                     }

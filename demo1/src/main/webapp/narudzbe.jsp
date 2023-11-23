@@ -77,7 +77,7 @@
                 <!-- Add code here to display games within the order -->
                 <% if (order.getStavke() != null && !order.getStavke().isEmpty()) { %>
                 <% for (Kart stavka : order.getStavke()) { %>
-                <div><%= stavka.getGameId() %> - <%= stavka.getGamePrice() %></div>
+                <div><%= stavka.getGameTitle() %> - <%= stavka.getGamePrice() %></div>
                 <% } %>
                 <% } else { %>
                 <p>No games in this order.</p>
